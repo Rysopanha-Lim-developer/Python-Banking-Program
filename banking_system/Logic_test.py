@@ -1,4 +1,7 @@
 import uuid
 
 unique_id = str(uuid.uuid4())[:8]
-print(unique_id)  # Output looks like: '7a4b2c1f'
+
+for i in range(0, 6):
+    unique_id = str(uuid.uuid4())[:8]
+    print(unique_id)

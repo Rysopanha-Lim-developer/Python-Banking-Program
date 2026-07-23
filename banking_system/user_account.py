@@ -1,6 +1,9 @@
 # Future update:
 # 1. Separate the re-enter password to make it appear before all entry
 # 2. Add rate limit to email verification
+# 3. use "for key, value in database.items()" to store both unique key and all value in it
+# 4. create a variable to store unique id after successful login 
+# 5. replace all ["userDataList"] with unique id
 
 
 

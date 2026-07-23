@@ -26,10 +26,14 @@ def ReadData():
 
 writeNewUser = ReadData()
 
-def UploadNewAcc(a):
+def UploadNewAcc(passIndata):
     try:
         with open(DATA_FILE_PATH, "w") as dataBase:
-            writeNewUser["userDataList"] = a
+            #This will create unique key for new account
+            userKey = str(uuid.uuid4())[:8]
+
+            #This will add new key value pair instead of replacing old data
+            writeNewUser[userKey] = passIndata
             json.dump(writeNewUser, dataBase, indent=4)
 
     except FileNotFoundError:
@@ -48,18 +52,24 @@ class CreateAcc(GetUsersData):
         super().__init__(username, pin, email)
         self.deposite = deposite
         self.depositeRiel = depositeRiel
-        self.uniqueId = str(uuid.uuid4())[:8]
+        # self.uniqueId = str(uuid.uuid4())[:8]
 
 
     def CreateNewAcc(self):
-        print(self.uniqueId)
-        return {self.uniqueId:{
+        return {
             "user_name":self.username,
             "pin": self.pin,
             "email": self.email,
             "balance": self.deposite,
             "balance_riel": self.depositeRiel
-        }}
+        }
+        # return {self.uniqueId:{
+        #     "user_name":self.username,
+        #     "pin": self.pin,
+        #     "email": self.email,
+        #     "balance": self.deposite,
+        #     "balance_riel": self.depositeRiel
+        # }}
 
 def AccCreation():
     print("========================")
@@ -73,9 +83,9 @@ def AccCreation():
     newRiel = input("Enter amount of deposite in Riel (Can be a '0'): ")
 
     newClient = CreateAcc(newUsername, newPassword, newEmail, newDollar, newRiel)
-    a = newClient.CreateNewAcc()
+    passIndata = newClient.CreateNewAcc()
 
-    UploadNewAcc(a)
+    UploadNewAcc(passIndata)
 
 
 

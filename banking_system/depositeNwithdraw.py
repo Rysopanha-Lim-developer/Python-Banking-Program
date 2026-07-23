@@ -1,4 +1,9 @@
 # Future update:
+# 1.
+# 2. 
+# 3. use for key, value in database.items() to store both unique key and all value in it
+# 4. create a variable to store unique id after successful login 
+# 5. replace all ["userDataList"] with unique id
 
 import time
 import user_account
