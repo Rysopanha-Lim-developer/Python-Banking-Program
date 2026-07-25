@@ -34,11 +34,25 @@
         "balance": 278247.0,
         "balance_riel": 0
     },
-    "17308934": {
-        "user_name": "veasna",
-        "pin": "232323",
-        "email": "veasna22@gmail.com",
-        "balance": "88883333",
-        "balance_riel": "99999"
+    "4aa51dcd": {
+        "user_name": "bobby67",
+        "pin": "574730",
+        "email": "bobby67@gmail.com",
+        "balance": 99.0,
+        "balance_riel": 99.0
+    },
+    "15aa6636": {
+        "user_name": "bobby67",
+        "pin": "292923",
+        "email": "bobby67@gmail.com",
+        "balance": 999.0,
+        "balance_riel": 9999.0
+    },
+    "fd6274f8": {
+        "user_name": "bopha6868",
+        "pin": "753729",
+        "email": "bopha342@gmail.com",
+        "balance": 888.32,
+        "balance_riel": 50000.0
     }
 }

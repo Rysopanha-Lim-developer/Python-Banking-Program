@@ -52,7 +52,6 @@ class CreateAcc(GetUsersData):
         super().__init__(username, pin, email)
         self.deposite = deposite
         self.depositeRiel = depositeRiel
-        # self.uniqueId = str(uuid.uuid4())[:8]
 
 
     def CreateNewAcc(self):
@@ -60,32 +59,111 @@ class CreateAcc(GetUsersData):
             "user_name":self.username,
             "pin": self.pin,
             "email": self.email,
-            "balance": self.deposite,
-            "balance_riel": self.depositeRiel
+            "balance": float(self.deposite),
+            "balance_riel": float(self.depositeRiel)
         }
-        # return {self.uniqueId:{
-        #     "user_name":self.username,
-        #     "pin": self.pin,
-        #     "email": self.email,
-        #     "balance": self.deposite,
-        #     "balance_riel": self.depositeRiel
-        # }}
 
 def AccCreation():
     print("========================")
     print("New account registration")
     print("========================")
 
-    newUsername = input("Enter your username: ")
-    newPassword = input("Enter your 6 digits pin: ")
-    newEmail = input("Enter your email: ")
-    newDollar = input("Enter amount of deposite in Dollar (Can be a '0'): ")
-    newRiel = input("Enter amount of deposite in Riel (Can be a '0'): ")
+    newUsername = NewUsernameCheck()
+    newPassword = NewPinCheck()
+    newEmail = NewEmailCheck()
+    newDollar = NewDepositeDollar()
+    newRiel = NewDepositeRiel()
 
     newClient = CreateAcc(newUsername, newPassword, newEmail, newDollar, newRiel)
     passIndata = newClient.CreateNewAcc()
 
     UploadNewAcc(passIndata)
+
+
+def NewUsernameCheck():
+    while True:
+        newUsername = input("Create your username: ").lower()
+        if (not newUsername.isalnum()) or (len(newUsername) < 7 or len(newUsername) > 22):
+            print("---------------------------------------------------------")
+            print("Username must be between 7 and 22 characters")
+            print("Username mustnot contains any special characters or space")
+            print("---------------------------------------------------------")
+            continue
+        else:
+            return newUsername
+
+
+def NewPinCheck():
+    while True:
+        newPin = input("Create your 6 digits pin: ")
+        if (not newPin.isdigit()) or (len(newPin)<6 or len(newPin)>6):
+            print("----------------------------")
+            print("PIN must contain only number")
+            print("PIN must be 6 digit")
+            print("----------------------------")
+            continue
+        else:
+            return newPin
+
+
+def NewEmailCheck():
+    while True:
+        print("-------------------------------------------------------")
+        print("Accepted email format")
+        print("Example: smith232@gmail.com")
+        print("---------------------------------------------------------")
+        newEmail = input("Enter your email to link with your account: ")
+        if ("@" not in newEmail) or (not newEmail.endswith('@gmail.com')) or (newEmail[:newEmail.index("@")] == ""):
+            print("Invaild email")
+            continue
+        else:
+            return newEmail
+
+
+def NewDepositeDollar():
+    while True:
+        try:
+            print("-----------------------------------------------------------------------")
+            newDepositeDollar = float(input("Enter amount of deposite in Dollar (Can be a '0'): "))
+            if newDepositeDollar < 0:
+                print("----------------------------------")
+                print("Invaild input")
+                print("Deposite must be at least 0 Dollar")
+                print("Deposite must be a number")
+                print("----------------------------------")
+                continue
+            else:
+                return newDepositeDollar
+        except ValueError:
+            print("----------------------------------")
+            print("Invaild input")
+            print("Deposite must be at least 0 Dollar")
+            print("Deposite must be a number")
+            print("----------------------------------")
+            continue
+
+
+def NewDepositeRiel():
+    while True:
+        try:
+            print("-------------------------------------------------------------------")
+            newDepositeRiel = float(input("Enter amount of deposite in Riel (Can be a '0'): "))
+            if newDepositeRiel < 0:
+                print("----------------------------------")
+                print("Invaild input")
+                print("Deposite must be at least 0 Riel")
+                print("Deposite must be a number")
+                print("----------------------------------")
+                continue
+            else:
+                return newDepositeRiel
+        except ValueError:
+            print("----------------------------------")
+            print("Invaild input")
+            print("Deposite must be at least 0 Riel")
+            print("Deposite must be a number")
+            print("----------------------------------")
+            continue
 
 
 
