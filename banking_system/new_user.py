@@ -82,14 +82,26 @@ def AccCreation():
 
 def NewUsernameCheck():
     while True:
+        print("---------------------------------------------------------")
+        print("Username must be unique")
+        print("Username must be between 7 and 22 characters")
+        print("Username mustnot contains any special characters or space")
+        print("---------------------------------------------------------")
         newUsername = input("Create your username: ").lower()
         if (not newUsername.isalnum()) or (len(newUsername) < 7 or len(newUsername) > 22):
-            print("---------------------------------------------------------")
-            print("Username must be between 7 and 22 characters")
-            print("Username mustnot contains any special characters or space")
-            print("---------------------------------------------------------")
             continue
+
+        is_duplicate = False
+        for key, value in writeNewUser.items():
+            if value["user_name"] == newUsername:
+                is_duplicate = True
+                break         
+
+        if is_duplicate:
+            print("Failed to create username")
+            continue          
         else:
+            print("Success")
             return newUsername
 
 
