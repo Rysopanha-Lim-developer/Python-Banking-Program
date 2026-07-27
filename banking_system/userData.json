@@ -1,58 +1,44 @@
 {
-    "2d0e1d7e": {
-        "user_name": "panha168",
+    "panha168": {
+        "id": "2d0e1d7e",
         "pin": "696969",
         "email": "panha168@gmail.com",
         "balance": 9671322.68,
         "balance_riel": 82489507.49
     },
-    "c8789279": {
-        "user_name": "vattana45",
+    "vattana45": {
+        "id": "c8789279",
         "pin": "888888",
         "email": "vattana44@gmail.com",
         "balance": 2316051.0,
         "balance_riel": 0
     },
-    "bf2cc0e6": {
-        "user_name": "sokha234",
+    "sokha234": {
+        "id": "bf2cc0e6",
         "pin": "121212",
         "email": "sokha16@gmail.com",
         "balance": 4444687077.0,
         "balance_riel": 0
     },
-    "24e10e6a": {
-        "user_name": "kanha008",
+    "kanha008": {
+        "id": "24e10e6a",
         "pin": "264519",
         "email": "kanha8@gmail.com",
         "balance": 187448.0,
         "balance_riel": 0
     },
-    "edff286d": {
-        "user_name": "devid256",
+    "devid256": {
+        "id": "24e10e6a",
         "pin": "372290",
         "email": "devid68@gmail.com",
         "balance": 278247.0,
         "balance_riel": 0
     },
-    "4aa51dcd": {
-        "user_name": "bobby67",
-        "pin": "574730",
-        "email": "bobby67@gmail.com",
-        "balance": 99.0,
-        "balance_riel": 99.0
-    },
-    "fd6274f8": {
-        "user_name": "bopha6868",
-        "pin": "753729",
-        "email": "bopha342@gmail.com",
-        "balance": 888.32,
-        "balance_riel": 50000.0
-    },
-    "e5b39059": {
-        "user_name": "tommyyy",
-        "pin": "231411",
-        "email": "tommyy@gmail.com",
-        "balance": 888322.08,
-        "balance_riel": 1000000.0
+    "steveeee": {
+        "id": "e023bc24",
+        "pin": "833399",
+        "email": "steve@gmail.com",
+        "balance": 99999.0,
+        "balance_riel": 100000.0
     }
 }

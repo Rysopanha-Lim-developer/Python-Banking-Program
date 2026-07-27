@@ -1,7 +1,5 @@
 # TODo
-# 1. Create a class that take in users data for acc creation
-# 2. Create a class for dollar acc creation
-# 3. Create a class for riel acc creation
+
 
 import json
 import uuid
@@ -26,14 +24,12 @@ def ReadData():
 
 writeNewUser = ReadData()
 
-def UploadNewAcc(passIndata):
+def UploadNewAcc(passed_in_username, passed_in_datas):
     try:
         with open(DATA_FILE_PATH, "w") as dataBase:
-            #This will create unique key for new account
-            userKey = str(uuid.uuid4())[:8]
 
             #This will add new key value pair instead of replacing old data
-            writeNewUser[userKey] = passIndata
+            writeNewUser[passed_in_username] = passed_in_datas
             json.dump(writeNewUser, dataBase, indent=4)
 
     except FileNotFoundError:
@@ -52,16 +48,17 @@ class CreateAcc(GetUsersData):
         super().__init__(username, pin, email)
         self.deposite = deposite
         self.depositeRiel = depositeRiel
+        self.id = str(uuid.uuid4())[:8]
 
 
     def CreateNewAcc(self):
-        return {
-            "user_name":self.username,
-            "pin": self.pin,
-            "email": self.email,
-            "balance": float(self.deposite),
-            "balance_riel": float(self.depositeRiel)
-        }
+        return self.username, {
+                                "id"          : self.id,
+                                "pin"         : self.pin,
+                                "email"       : self.email,
+                                "balance"     : float(self.deposite),
+                                "balance_riel": float(self.depositeRiel)
+                            }
 
 def AccCreation():
     print("========================")
@@ -75,9 +72,9 @@ def AccCreation():
     newRiel = NewDepositeRiel()
 
     newClient = CreateAcc(newUsername, newPassword, newEmail, newDollar, newRiel)
-    passIndata = newClient.CreateNewAcc()
+    passed_in_username, passed_in_datas = newClient.CreateNewAcc()
 
-    UploadNewAcc(passIndata)
+    UploadNewAcc(passed_in_username, passed_in_datas)
 
 
 def NewUsernameCheck():
@@ -92,8 +89,8 @@ def NewUsernameCheck():
             continue
 
         is_duplicate = False
-        for key, value in writeNewUser.items():
-            if value["user_name"] == newUsername:
+        for key in writeNewUser.keys():
+            if key == newUsername:
                 is_duplicate = True
                 break         
 
