@@ -38,11 +38,11 @@ def deposite_function(username):
     try:
         deposite = float(input(">>>>>Enter amount for deposite: "))
         if deposite >= 0:
-            newbalance = user_account.all_users["userDataList"][username]["balance"] + deposite
+            newbalance = user_account.all_users[username]["balance"] + deposite
             user_account.json_file_balance_update(username, newbalance)
             time.sleep(2)
             print(f"<----------You successfuly deposite ${float(deposite)} to your account------------>")
-            print(f"Your current balance is ${user_account.all_users["userDataList"][username]["balance"]}")
+            print(f"Your current balance is ${user_account.all_users[username]["balance"]}")
         else:
             print("Invaild input please enter positve value")
             deposite_function(username)
@@ -57,16 +57,16 @@ def withdraw_function(username):
     try:
         withdraw = float(input(">>>>>Enter amount for deposite: "))
         if withdraw >= 0:
-            newbalance = user_account.all_users["userDataList"][username]["balance"] - withdraw
+            newbalance = user_account.all_users[username]["balance"] - withdraw
             if newbalance < 0:
                 time.sleep(2)
                 print("Insuffficient balance!!")
-                print(f"Your current balance is ${user_account.all_users["userDataList"][username]["balance"]}")
+                print(f"Your current balance is ${user_account.all_users[username]["balance"]}")
             else:
                 user_account.json_file_balance_update(username, newbalance)
                 time.sleep(2)
                 print(f"<----------You successfuly withdraw ${float(withdraw)} from your account------------>")
-                print(f"Your current balance is ${user_account.all_users["userDataList"][username]["balance"]}")
+                print(f"Your current balance is ${user_account.all_users[username]["balance"]}")
         else:
             print("Invaild input please enter positve value")
             withdraw_function(username)

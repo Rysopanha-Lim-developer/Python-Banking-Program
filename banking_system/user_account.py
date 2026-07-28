@@ -3,7 +3,7 @@
 # 2. Add rate limit to email verification
 # 3. use "for key, value in database.items()" to store both unique key and all value in it
 # 4. create a variable to store unique id after successful login 
-# 5. replace all ["userDataList"] with unique id
+# 5. remove all ["UserDataList"] 
 
 
 
@@ -33,7 +33,7 @@ def json_file_password_update(username, newpassword):
     try:
         with open(DATA_FILE_PATH, "w") as users:
             newpassword = str(newpassword) 
-            all_users["userDataList"][username]['pin'] = newpassword
+            all_users[username]['pin'] = newpassword
             json.dump(all_users, users, indent=4)
     except FileNotFoundError:
         print("⚠️ No database file found.")
@@ -42,7 +42,7 @@ def json_file_password_update(username, newpassword):
 def json_file_balance_update(username, newbalance):
     try:
         with open(DATA_FILE_PATH, "w") as users:
-            all_users["userDataList"][username]['balance'] = newbalance
+            all_users[username]['balance'] = newbalance
             json.dump(all_users, users, indent=4)
     except FileNotFoundError:
         print("⚠️ No database file found.")
@@ -51,7 +51,7 @@ def json_file_balance_update(username, newbalance):
 def json_file_balance_riel_update(username, newbalance):
     try:
         with open(DATA_FILE_PATH, "w") as users:
-            all_users["userDataList"][username]['balance_riel'] = newbalance
+            all_users[username]['balance_riel'] = newbalance
             json.dump(all_users, users, indent=4)
     except FileNotFoundError:
         print("⚠️ No database file found.")
@@ -59,12 +59,12 @@ def json_file_balance_riel_update(username, newbalance):
 
 def userAutentication(username): 
     max_attempts = 5   
-    if username in all_users["userDataList"]:
+    if username in all_users:
         for i in range(max_attempts): 
             max_attempts -=1
             passwordInput = input(">>>>>Enter 6 digits PIN: ")
             
-            if (str(passwordInput) == all_users["userDataList"][username]['pin']):
+            if (str(passwordInput) == all_users[username]['pin']):
                 greeting_user(username)
                 break
             else:
@@ -109,7 +109,7 @@ def reset_password_restriction(username):
         print("Please verify your email for account recovery.")
         print("==============================================")
         verify_email = input("Enter your email here: ")
-        if verify_email == all_users["userDataList"][username]["email"]:
+        if verify_email == all_users[username]["email"]:
             resetPassword(username)
             return False
         else:
@@ -124,7 +124,7 @@ def greeting_user(username):
 
 
 def deposite_money_inAcc(username):
-    print(f"<----------You currently have ${all_users["userDataList"][username]["balance"]}------------>")
+    print(f"<----------You currently have ${all_users[username]["balance"]}------------>")
 
 
 def return_back_to_menu():
@@ -143,4 +143,4 @@ def return_back_to_menu():
 
 
 if __name__ == "__main__":
-    userAutentication("panha")
+    userAutentication("panha168")

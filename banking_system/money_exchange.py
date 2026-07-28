@@ -36,8 +36,8 @@ def exchange_choices(username):
 
 
 def dollar_to_riel(username):
-    dollar = user_account.all_users["userDataList"][username]["balance"]
-    riel = user_account.all_users["userDataList"][username]["balance_riel"]
+    dollar = user_account.all_users[username]["balance"]
+    riel = user_account.all_users[username]["balance_riel"]
 
     while True:
         dollar_from = input("Enter the amount for exchange: ")
@@ -58,8 +58,8 @@ def dollar_to_riel(username):
 
 
 def riel_to_dollar(username):
-    dollar = user_account.all_users["userDataList"][username]["balance"]
-    riel = user_account.all_users["userDataList"][username]["balance_riel"]
+    dollar = user_account.all_users[username]["balance"]
+    riel = user_account.all_users[username]["balance_riel"]
 
     while True:
         riel_from = input("Enter the amount for exchange: ")

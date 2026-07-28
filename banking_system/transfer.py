@@ -14,7 +14,7 @@ def money_transfer(sender):
     time.sleep(1)
     while True:
         reciver = input(">>>>>Enter username for reciver: ")
-        if sender != reciver and sender in user_account.all_users['userDataList'] and reciver in user_account.all_users['userDataList']:
+        if sender != reciver and sender in user_account.all_users and reciver in user_account.all_users:
             transfer_function(sender, reciver)
             break
         else:
@@ -23,7 +23,7 @@ def money_transfer(sender):
 
 
 def transfer_function(sender, reciver):
-        money_sender = user_account.all_users['userDataList'][sender]['balance']
+        money_sender = user_account.all_users[sender]['balance']
 
         while True:
             money_recieve = input(">>>Enter the amout of money to transfer: ")
@@ -44,7 +44,7 @@ def transfer_function(sender, reciver):
 def transfer_calculation(sender, money_sender, reciver, money_recieve):
     money_left_sender = money_sender - float(money_recieve)
     if money_left_sender >= 0:
-        meney_left_reciever = user_account.all_users['userDataList'][reciver]['balance'] + float(money_recieve)
+        meney_left_reciever = user_account.all_users[reciver]['balance'] + float(money_recieve)
         user_account.json_file_balance_update(sender, money_left_sender)
         user_account.json_file_balance_update(reciver, meney_left_reciever)
         time.sleep(1)
@@ -60,4 +60,4 @@ def transfer_calculation(sender, money_sender, reciver, money_recieve):
 
 
 if __name__ == "__main__":
-    money_transfer("panha")
+    money_transfer("panha168")
