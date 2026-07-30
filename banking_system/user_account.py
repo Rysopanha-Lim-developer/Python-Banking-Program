@@ -10,6 +10,7 @@
 import json
 from pathlib import Path
 import time
+import random
 
 # 1. This finds the folder you are currently in (the banking_system folder)
 BASE_DIR = Path(__file__).resolve().parent
@@ -111,7 +112,7 @@ def reset_password_restriction(username):
         print("==============================================")
         verify_email = input("Enter your email here: ")
         if verify_email == all_users[username]["email"]:
-            resetPassword(username)
+            sending_OTP(username)
             return False
         else:
             print("Wrong email try again...")
@@ -137,6 +138,29 @@ def new_password_verification(username):
                 print("-----------------------")
                 print("Login to other account?")
                 return True
+
+
+def sending_OTP(username):
+    otp = ''
+    for i in range (0, 6):
+        opt_fragment = random.randint(0, 9)
+        otp += str(opt_fragment)
+
+    confirm_OTP(otp)
+    resetPassword(username)
+
+
+def confirm_OTP(otp):
+    print(f"This is your OTP {otp}")
+    while True:
+        otp_input = input("Enter your OTP: ")
+        if otp_input == otp:
+            return False
+        else:
+            print("Wrong code please try again in 30s")
+            time.sleep(5)
+            continue
+
 
 
 def greeting_user(username):
