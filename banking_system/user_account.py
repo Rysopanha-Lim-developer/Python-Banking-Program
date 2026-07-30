@@ -57,35 +57,36 @@ def json_file_balance_riel_update(username, newbalance):
         print("⚠️ No database file found.")
 
 
+def userInput_function():
+    while True:
+        usernameInput = input(">>>>>Enter your username: ").lower()
+        if userAutentication(usernameInput):
+            continue
+        else:
+            return usernameInput
+            
+
 def userAutentication(username): 
     max_attempts = 5   
     if username in all_users:
         for i in range(max_attempts): 
-            max_attempts -=1
             passwordInput = input(">>>>>Enter 6 digits PIN: ")
             
             if (str(passwordInput) == all_users[username]['pin']):
                 greeting_user(username)
                 break
             else:
+                max_attempts -=1
                 if max_attempts > 0:
                     print(f"Wrong password! You have {max_attempts} more try...")
                     continue
                 elif max_attempts <= 0:
                     print("Your account has been lock")
                     reset_password_restriction(username)
+                    return new_password_verification(username)
     else:
         print("Username Not available!")
         return True
-
-
-def userInput_function():
-    while True:
-            usernameInput = input(">>>>>Enter your username: ").lower()
-            if userAutentication(usernameInput):
-                continue
-            else:
-                return usernameInput
 
 
 def resetPassword(username):
@@ -115,6 +116,27 @@ def reset_password_restriction(username):
         else:
             print("Wrong email try again...")
             continue
+
+
+def new_password_verification(username):
+    max_attempts = 5   
+    for i in range(max_attempts): 
+        passwordInput = input(">>>>>Enter 6 digits PIN: ")
+        
+        if (str(passwordInput) == all_users[username]['pin']):
+            greeting_user(username)
+            break
+        else:
+            max_attempts -=1
+            if max_attempts > 0:
+                print(f"Wrong password! You have {max_attempts} more try...")
+                continue
+            elif max_attempts <= 0:
+                print("Your account has been frozen...")
+                print("Please contact our support team for account recovery.")
+                print("-----------------------")
+                print("Login to other account?")
+                return True
 
 
 def greeting_user(username):

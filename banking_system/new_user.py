@@ -89,10 +89,9 @@ def NewUsernameCheck():
             continue
 
         is_duplicate = False
-        for key in writeNewUser.keys():
-            if key == newUsername:
-                is_duplicate = True
-                break         
+        if newUsername in writeNewUser:
+            is_duplicate = True
+            break         
 
         if is_duplicate:
             print("Failed to create username")
