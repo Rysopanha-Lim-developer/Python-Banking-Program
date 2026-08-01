@@ -148,17 +148,14 @@ def confirm_OTP(username):
     for i in range(max_attempts):
         print(f"You have {max_attempts} left")
         otp_input = input("Enter your OTP: ")
-        if max_attempts < 0:
-            print("You have reached the maximum attempts")
-            return True
-
         if otp_input == otp:
             resetPassword(username)
             return False
-        else:
-            max_attempts -= 1
-            print("Wrong code please try again")
-            continue
+        max_attempts -= 1
+        print("Wrong code please try again")
+    if max_attempts <= 0:
+        print("You have reached the maximum attempts")
+        return True
 
 
 
