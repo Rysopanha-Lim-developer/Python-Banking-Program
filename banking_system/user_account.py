@@ -10,7 +10,7 @@
 import json
 from pathlib import Path
 import time
-import random
+import secrets
 
 # 1. This finds the folder you are currently in (the banking_system folder)
 BASE_DIR = Path(__file__).resolve().parent
@@ -65,7 +65,7 @@ def userInput_function():
             continue
         else:
             return usernameInput
-            
+
 
 def userAutentication(username): 
     max_attempts = 5   
@@ -112,8 +112,7 @@ def reset_password_restriction(username):
         print("==============================================")
         verify_email = input("Enter your email here: ")
         if verify_email == all_users[username]["email"]:
-            sending_OTP(username)
-            return False
+            return confirm_OTP(username)
         else:
             print("Wrong email try again...")
             continue
@@ -140,26 +139,33 @@ def new_password_verification(username):
                 return True
 
 
-def sending_OTP(username):
+def confirm_OTP(username):
+    max_attempts = 5
+    confirming = True
     otp = ''
-    for i in range (0, 6):
-        opt_fragment = random.randint(0, 9)
+
+    for i in range (6):
+        opt_fragment = secrets.randbelow(10)
         otp += str(opt_fragment)
 
-    confirm_OTP(otp)
-    resetPassword(username)
-
-
-def confirm_OTP(otp):
     print(f"This is your OTP {otp}")
-    while True:
+
+    while confirming:
         otp_input = input("Enter your OTP: ")
-        if otp_input == otp:
-            return False
-        else:
-            print("Wrong code please try again in 30s")
-            time.sleep(5)
-            continue
+        for i in range(max_attempts):
+            if max_attempts < 0:
+                confirming = False
+                return True
+            
+            if otp_input == otp:
+                resetPassword(username)
+                confirming = False
+                break
+            else:
+                max_attempts -= 1
+                print("Wrong code please try again in 30s")
+                time.sleep(30)
+                continue
 
 
 
