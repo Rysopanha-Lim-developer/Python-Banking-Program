@@ -83,7 +83,8 @@ def userAutentication(username):
                     continue
                 elif max_attempts <= 0:
                     print("Your account has been lock")
-                    reset_password_restriction(username)
+                    if reset_password_restriction(username):
+                        return True
                     return new_password_verification(username)
     else:
         print("Username Not available!")
@@ -140,32 +141,24 @@ def new_password_verification(username):
 
 
 def confirm_OTP(username):
-    max_attempts = 5
-    confirming = True
-    otp = ''
-
-    for i in range (6):
-        opt_fragment = secrets.randbelow(10)
-        otp += str(opt_fragment)
-
+    otp = ''.join(str(secrets.randbelow(10)) for _ in range(6))
     print(f"This is your OTP {otp}")
 
-    while confirming:
+    max_attempts = 5
+    for i in range(max_attempts):
+        print(f"You have {max_attempts} left")
         otp_input = input("Enter your OTP: ")
-        for i in range(max_attempts):
-            if max_attempts < 0:
-                confirming = False
-                return True
-            
-            if otp_input == otp:
-                resetPassword(username)
-                confirming = False
-                break
-            else:
-                max_attempts -= 1
-                print("Wrong code please try again in 30s")
-                time.sleep(30)
-                continue
+        if max_attempts < 0:
+            print("You have reached the maximum attempts")
+            return True
+
+        if otp_input == otp:
+            resetPassword(username)
+            return False
+        else:
+            max_attempts -= 1
+            print("Wrong code please try again")
+            continue
 
 
 
