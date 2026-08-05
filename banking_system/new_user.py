@@ -49,11 +49,13 @@ class CreateAcc(GetUsersData):
         self.deposite = deposite
         self.depositeRiel = depositeRiel
         self.id = str(uuid.uuid4())[:8]
+        self.frozen = False
 
 
     def CreateNewAcc(self):
         return self.username, {
                                 "id"          : self.id,
+                                "frozen"      : self.frozen,
                                 "pin"         : self.pin,
                                 "email"       : self.email,
                                 "balance"     : float(self.deposite),

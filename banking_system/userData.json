@@ -1,6 +1,7 @@
 {
     "panha168": {
         "id": "2d0e1d7e",
+        "frozen": false,
         "pin": "696969",
         "email": "panha168@gmail.com",
         "balance": 9669103.629999999,
@@ -8,6 +9,7 @@
     },
     "vattana45": {
         "id": "c8789279",
+        "frozen": false,
         "pin": "888888",
         "email": "vattana44@gmail.com",
         "balance": 2316051.05,
@@ -15,6 +17,7 @@
     },
     "sokha234": {
         "id": "bf2cc0e6",
+        "frozen": false,
         "pin": "121212",
         "email": "sokha16@gmail.com",
         "balance": 4444687077.0,
@@ -22,6 +25,7 @@
     },
     "kanha008": {
         "id": "24f10e9z",
+        "frozen": false,
         "pin": "264519",
         "email": "kanha8@gmail.com",
         "balance": 189670.0,
@@ -29,6 +33,7 @@
     },
     "devid256": {
         "id": "24e10e6a",
+        "frozen": false,
         "pin": "372290",
         "email": "devid68@gmail.com",
         "balance": 278247.0,
@@ -36,9 +41,26 @@
     },
     "steveeee": {
         "id": "e023bc24",
+        "frozen": false,
         "pin": "833399",
         "email": "steve@gmail.com",
         "balance": 99999.0,
         "balance_riel": 100000.0
+    },
+    "kongcha": {
+        "id": "dc1b9694",
+        "frozen": false,
+        "pin": "109284",
+        "email": "kongcha@gmail.com",
+        "balance": 0.0,
+        "balance_riel": 0.0
+    },
+    "zoebacker": {
+        "id": "0d126300",
+        "frozen": false,
+        "pin": "019238",
+        "email": "zoeHateJake@gmail.com",
+        "balance": 10000.0,
+        "balance_riel": 40000.0
     }
 }

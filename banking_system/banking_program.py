@@ -1,7 +1,4 @@
 # Future update:
-# 1. Using OOP to create the "New account register"
-# 2. Using OOP to create the "Multiple accounts for one user"
-# 3. Implement higher secturity for all accounts
 # 4. Create real UI PyQt5 GUI
 # 5. Find new ways to store users datas
 
@@ -10,6 +7,7 @@ import user_account
 import depositeNwithdraw
 import transfer
 import money_exchange
+import new_user
 # from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
@@ -19,6 +17,7 @@ def ui():
     print("==========================")
 
     print("======================================")
+    print("Enter 0 to Create new account")
     print("Enter 1 to see view your balance.")
     print("Enter 2 to Deposite/Withdraw money")
     print("Enter 3 to Transfer money")
@@ -32,7 +31,7 @@ def choices():
     while True:
         try:
             choice = int(input(">>>Choose your actions: "))
-            if 1 <= choice <= 5:
+            if 0 <= choice <= 5:
                 return choice
             print("Invalid input. Please try again")
         except ValueError:
@@ -44,6 +43,14 @@ while app_run:
     ui()
     choice = choices()      
     match choice:
+        case 0:
+            new_user.AccCreation()
+            print("Your account has been created successfully")
+            print("Thank you for choose our bank")
+
+            user_account.return_back_to_menu()
+            print("Returning to main menu...")
+            time.sleep(5)
         case 1:
             users = user_account.userInput_function()
             
