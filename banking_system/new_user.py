@@ -1,39 +1,8 @@
 # TODo
 
 
-import json
+import Read_and_Write_Data
 import uuid
-from pathlib import Path
-
-# 1. This finds the folder you are currently in (the banking_system folder)
-BASE_DIR = Path(__file__).resolve().parent
-
-# 2. Just add the file name directly! No extra folders needed.
-DATA_FILE_PATH = BASE_DIR/"userData.json"
-
-
-def ReadData():
-    try:
-        with open(DATA_FILE_PATH, "r") as dataBase:
-            readedData = json.load(dataBase)
-            return readedData
-
-    except FileNotFoundError:
-        print("⚠️ No database file found.")
-
-
-writeNewUser = ReadData()
-
-def UploadNewAcc(passed_in_username, passed_in_datas):
-    try:
-        with open(DATA_FILE_PATH, "w") as dataBase:
-
-            #This will add new key value pair instead of replacing old data
-            writeNewUser[passed_in_username] = passed_in_datas
-            json.dump(writeNewUser, dataBase, indent=4)
-
-    except FileNotFoundError:
-        print("⚠️ No database file found.")
 
 
 class GetUsersData:
@@ -76,7 +45,7 @@ def AccCreation():
     newClient = CreateAcc(newUsername, newPassword, newEmail, newDollar, newRiel)
     passed_in_username, passed_in_datas = newClient.CreateNewAcc()
 
-    UploadNewAcc(passed_in_username, passed_in_datas)
+    Read_and_Write_Data.UploadNewAcc(passed_in_username, passed_in_datas)
 
 
 def NewUsernameCheck():
@@ -91,9 +60,8 @@ def NewUsernameCheck():
             continue
 
         is_duplicate = False
-        if newUsername in writeNewUser:
-            is_duplicate = True
-            break         
+        if newUsername in Read_and_Write_Data.all_users:
+            is_duplicate = True         
 
         if is_duplicate:
             print("Failed to create username")

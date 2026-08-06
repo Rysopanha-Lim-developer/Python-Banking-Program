@@ -1,6 +1,6 @@
 # Future update:
 
-import user_account
+import Read_and_Write_Data
 import time
 
 #Exchange rate 1$ = 4100Riel
@@ -31,8 +31,8 @@ def exchange_choices(username):
 
 
 def dollar_to_riel(username):
-    dollar = user_account.all_users[username]["balance"]
-    riel = user_account.all_users[username]["balance_riel"]
+    dollar = Read_and_Write_Data.all_users[username]["balance"]
+    riel = Read_and_Write_Data.all_users[username]["balance_riel"]
 
     while True:
         dollar_from = input("Enter the amount for exchange: ")
@@ -40,8 +40,8 @@ def dollar_to_riel(username):
             if 0 <= float(dollar_from) <= dollar:
                 exchaged_money = round(riel + (float(dollar_from)*4100), 2)
                 new_dollar = dollar - float(dollar_from)
-                user_account.json_file_balance_update(username, new_dollar)
-                user_account.json_file_balance_riel_update(username, exchaged_money)
+                Read_and_Write_Data.json_file_balance_update(username, new_dollar)
+                Read_and_Write_Data.json_file_balance_riel_update(username, exchaged_money)
                 print(f"Successfully exchange ${dollar_from} to Riel")
                 return False
             else:
@@ -53,8 +53,8 @@ def dollar_to_riel(username):
 
 
 def riel_to_dollar(username):
-    dollar = user_account.all_users[username]["balance"]
-    riel = user_account.all_users[username]["balance_riel"]
+    dollar = Read_and_Write_Data.all_users[username]["balance"]
+    riel = Read_and_Write_Data.all_users[username]["balance_riel"]
 
     while True:
         riel_from = input("Enter the amount for exchange: ")
@@ -62,8 +62,8 @@ def riel_to_dollar(username):
             if 0 <= float(riel_from) <= riel:
                 exchaged_money = round(dollar + (float(riel_from)/4100), 2)
                 new_riel = riel - float(riel_from)
-                user_account.json_file_balance_update(username, exchaged_money)
-                user_account.json_file_balance_riel_update(username, new_riel)
+                Read_and_Write_Data.json_file_balance_update(username, exchaged_money)
+                Read_and_Write_Data.json_file_balance_riel_update(username, new_riel)
                 print(f"Successfully exchange {riel_from} Riel to Dollar")
                 return False
             else:

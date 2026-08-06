@@ -2,15 +2,15 @@
     "panha168": {
         "id": "2d0e1d7e",
         "frozen": false,
-        "pin": "696969",
+        "pin": "444444",
         "email": "panha168@gmail.com",
-        "balance": 9669103.629999999,
+        "balance": 9669103.62,
         "balance_riel": 82489507.49
     },
     "vattana45": {
         "id": "c8789279",
         "frozen": false,
-        "pin": "888888",
+        "pin": "191919",
         "email": "vattana44@gmail.com",
         "balance": 2316051.05,
         "balance_riel": 0
@@ -46,14 +46,6 @@
         "email": "steve@gmail.com",
         "balance": 99999.0,
         "balance_riel": 100000.0
-    },
-    "kongcha": {
-        "id": "dc1b9694",
-        "frozen": false,
-        "pin": "109284",
-        "email": "kongcha@gmail.com",
-        "balance": 0.0,
-        "balance_riel": 0.0
     },
     "zoebacker": {
         "id": "0d126300",

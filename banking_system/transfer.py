@@ -2,6 +2,7 @@
 
 
 import user_account
+import Read_and_Write_Data
 import time
 
 
@@ -10,7 +11,7 @@ def money_transfer(sender):
     time.sleep(1)
     while True:
         reciver = input(">>>>>Enter username for reciver: ")
-        if sender != reciver and sender in user_account.all_users and reciver in user_account.all_users:
+        if sender != reciver and sender in Read_and_Write_Data.all_users and reciver in Read_and_Write_Data.all_users:
             transfer_function(sender, reciver)
             break
         else:
@@ -19,7 +20,7 @@ def money_transfer(sender):
 
 
 def transfer_function(sender, reciver):
-        money_sender = user_account.all_users[sender]['balance']
+        money_sender = Read_and_Write_Data.all_users[sender]['balance']
 
         while True:
             money_recieve = input(">>>Enter the amout of money to transfer: ")
@@ -40,15 +41,15 @@ def transfer_function(sender, reciver):
 def transfer_calculation(sender, money_sender, reciver, money_recieve):
     money_left_sender = money_sender - float(money_recieve)
     if money_left_sender >= 0:
-        meney_left_reciever = user_account.all_users[reciver]['balance'] + float(money_recieve)
-        user_account.json_file_balance_update(sender, money_left_sender)
-        user_account.json_file_balance_update(reciver, meney_left_reciever)
+        meney_left_reciever = Read_and_Write_Data.all_users[reciver]['balance'] + float(money_recieve)
+        Read_and_Write_Data.json_file_balance_update(sender, money_left_sender)
+        Read_and_Write_Data.json_file_balance_update(reciver, meney_left_reciever)
         time.sleep(1)
-        print(f"You successfully transfered ${meney_left_reciever} to {reciver}")
-        user_account.deposite_money_inAcc(sender)
+        print(f"You successfully transfered ${money_recieve} to {reciver}")
+        user_account.show_money_inAcc(sender)
     else:
         print("Insufficient balance.")
-        user_account.deposite_money_inAcc(sender)
+        user_account.show_money_inAcc(sender)
         transfer_function(sender, reciver)
 
 

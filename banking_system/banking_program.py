@@ -54,7 +54,7 @@ while app_run:
         case 1:
             users = user_account.userInput_function()
             
-            user_account.deposite_money_inAcc(users)
+            user_account.show_money_inAcc(users)
 
             user_account.return_back_to_menu()
             print("Returning to main menu...")

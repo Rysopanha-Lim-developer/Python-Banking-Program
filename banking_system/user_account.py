@@ -1,55 +1,11 @@
 # Future update:
 
 
-import json
-from pathlib import Path
+import Read_and_Write_Data
 import time
 import secrets
 
-# 1. This finds the folder you are currently in (the banking_system folder)
-BASE_DIR = Path(__file__).resolve().parent
 
-# 2. Just add the file name directly! No extra folders needed.
-DATA_FILE_PATH = BASE_DIR/"userData.json"
-
-
-def read_user_data():
-    try:
-        with open(DATA_FILE_PATH, "r") as users:
-                userDatas = json.load(users)
-                return userDatas
-    except FileNotFoundError:
-        print("⚠️ No database file found.")
-
-
-all_users = read_user_data()
-
-def json_file_password_update(username, newpassword):
-    try:
-        with open(DATA_FILE_PATH, "w") as users:
-            newpassword = str(newpassword) 
-            all_users[username]['pin'] = newpassword
-            json.dump(all_users, users, indent=4)
-    except FileNotFoundError:
-        print("⚠️ No database file found.")
-
-
-def json_file_balance_update(username, newbalance):
-    try:
-        with open(DATA_FILE_PATH, "w") as users:
-            all_users[username]['balance'] = newbalance
-            json.dump(all_users, users, indent=4)
-    except FileNotFoundError:
-        print("⚠️ No database file found.")
-
-
-def json_file_balance_riel_update(username, newbalance):
-    try:
-        with open(DATA_FILE_PATH, "w") as users:
-            all_users[username]['balance_riel'] = newbalance
-            json.dump(all_users, users, indent=4)
-    except FileNotFoundError:
-        print("⚠️ No database file found.")
 
 
 def userInput_function():
@@ -63,11 +19,11 @@ def userInput_function():
 
 def userAutentication(username): 
     max_attempts = 5   
-    if username in all_users:
+    if (username in Read_and_Write_Data.all_users) and (not Read_and_Write_Data.all_users[username]["frozen"]):
         for i in range(max_attempts): 
             passwordInput = input(">>>>>Enter 6 digits PIN: ")
             
-            if (str(passwordInput) == all_users[username]['pin']):
+            if (str(passwordInput) == Read_and_Write_Data.all_users[username]['pin']):
                 greeting_user(username)
                 break
             else:
@@ -82,6 +38,7 @@ def userAutentication(username):
                     return new_password_verification(username)
     else:
         print("Username Not available!")
+        print("OR your account has been locked!")
         return True
 
 
@@ -89,7 +46,7 @@ def resetPassword(username):
     while True:
         newPassword = input(">>>>>Enter new 6 digits PIN: ")
         if len(newPassword) == 6 and newPassword.isdigit():
-            json_file_password_update(username, newPassword)
+            Read_and_Write_Data.json_file_password_update(username, newPassword)
             print("=====================")
             print(" PIN has been reset")
             print("=====================")
@@ -106,7 +63,7 @@ def reset_password_restriction(username):
         print("Please verify your email for account recovery.")
         print("==============================================")
         verify_email = input("Enter your email here: ")
-        if verify_email == all_users[username]["email"]:
+        if verify_email == Read_and_Write_Data.all_users[username]["email"]:
             return confirm_OTP(username)
         else:
             print("Wrong email try again...")
@@ -118,7 +75,7 @@ def new_password_verification(username):
     for i in range(max_attempts): 
         passwordInput = input(">>>>>Enter 6 digits PIN: ")
         
-        if (str(passwordInput) == all_users[username]['pin']):
+        if (str(passwordInput) == Read_and_Write_Data.all_users[username]['pin']):
             greeting_user(username)
             break
         else:
@@ -127,6 +84,7 @@ def new_password_verification(username):
                 print(f"Wrong password! You have {max_attempts} more try...")
                 continue
             elif max_attempts <= 0:
+                Read_and_Write_Data.json_file_frozen_status(username, True)
                 print("Your account has been frozen...")
                 print("Please contact our support team for account recovery.")
                 print("-----------------------")
@@ -148,7 +106,12 @@ def confirm_OTP(username):
         max_attempts -= 1
         print("Wrong code please try again")
     if max_attempts <= 0:
+        Read_and_Write_Data.json_file_frozen_status(username, True)
         print("You have reached the maximum attempts")
+        print("Your account has been frozen...")
+        print("Please contact our support team for account recovery.")
+        print("-----------------------")
+        print("Login to other account?")
         return True
 
 
@@ -159,9 +122,9 @@ def greeting_user(username):
     print("==========================")
 
 
-def deposite_money_inAcc(username):
-    print(f"<----------You currently have ${all_users[username]["balance"]}------------>")
-    print(f"<----------You currently have {all_users[username]["balance_riel"]} Riel------------>")
+def show_money_inAcc(username):
+    print(f"<----------You currently have ${Read_and_Write_Data.all_users[username]['balance']}------------>")
+    print(f"<----------You currently have {Read_and_Write_Data.all_users[username]['balance_riel']} Riel------------>")
 
 
 def return_back_to_menu():
@@ -169,12 +132,13 @@ def return_back_to_menu():
     print("==========================")
     print("To return to the main menu")
     print("==========================")
-    return_back = input("Enter 'R' to return: ").lower()
-    if return_back == "r":
-        return True
-    else:
-        print("Invalid input. Please try again")
-        return_back_to_menu()
+    while True:
+        return_back = input("Enter 'R' to return: ").lower()
+        if return_back == "r":
+            return True
+        else:
+            print("Invalid input. Please try again")
+            continue
 
 
 
