@@ -1,7 +1,7 @@
 {
     "panha168": {
         "id": "2d0e1d7e",
-        "frozen": false,
+        "frozen": true,
         "pin": "444444",
         "email": "panha168@gmail.com",
         "balance": 9669103.62,
@@ -12,7 +12,7 @@
         "frozen": false,
         "pin": "191919",
         "email": "vattana44@gmail.com",
-        "balance": 2316051.05,
+        "balance": 2317100.05,
         "balance_riel": 0
     },
     "sokha234": {
@@ -20,7 +20,7 @@
         "frozen": false,
         "pin": "121212",
         "email": "sokha16@gmail.com",
-        "balance": 4444687077.0,
+        "balance": 4444687144.0,
         "balance_riel": 0
     },
     "kanha008": {

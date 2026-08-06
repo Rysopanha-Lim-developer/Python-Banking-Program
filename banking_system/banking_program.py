@@ -1,6 +1,7 @@
 # Future update:
 # 4. Create real UI PyQt5 GUI
 # 5. Find new ways to store users datas
+# 6. Add account frozen verification to other file
 
 import time
 import user_account

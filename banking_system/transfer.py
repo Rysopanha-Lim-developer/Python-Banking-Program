@@ -11,10 +11,11 @@ def money_transfer(sender):
     time.sleep(1)
     while True:
         reciver = input(">>>>>Enter username for reciver: ")
-        if sender != reciver and sender in Read_and_Write_Data.all_users and reciver in Read_and_Write_Data.all_users:
+        if sender != reciver and sender in Read_and_Write_Data.all_users and reciver in Read_and_Write_Data.all_users and (not Read_and_Write_Data.all_users[reciver]["frozen"]):
             transfer_function(sender, reciver)
             break
         else:
+            print("The reciver account might be frozen.")
             print("Please check the reciver username again.")
             continue
 
